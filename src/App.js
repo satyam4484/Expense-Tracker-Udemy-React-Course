@@ -23,8 +23,8 @@ const DummyExpense = [
     date: new Date(2021, 5, 12),
   },
 ];
-
 const App = () => {
+  const [add , setAdd] = useState(false);
   const [expense,setExpense] = useState(DummyExpense)
   const addExpenseHandler = expense =>{
     setExpense(prevExpenses =>{
@@ -32,10 +32,23 @@ const App = () => {
     });
   }
 
-
+  const addHandler = (e)=>{
+    if(add == false) {
+      setAdd(true);
+    }else{
+      setAdd(false);
+    }
+    
+  }
+  
   return (
     <div>
+      {add?
+      <>
       <NewExpense onAddExpense={addExpenseHandler} />
+      <button  onClick={addHandler}>Cancel</button>
+      </>
+      :<button onClick={addHandler}>Add Expenses</button>}
       <Expenses items = {expense}/>
     </div>
   )
